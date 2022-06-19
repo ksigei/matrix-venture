@@ -10,10 +10,138 @@ h1 {
 }
 
 header {
-  position: absolute;
-  width: 100vw;
   height: 100vh;
   left: 0px;
   top: 0px;
   background: linear-gradient(90.19deg, #001435 0.15%, #023384 98.45%);
+}
+
+.intro {
+  position: absolute;
+  width: 441px;
+  height: 228px;
+  font-family: "Raleway";
+  font-style: normal;
+  margin: 28.5vh 0 0 8.5vw;
+}
+
+.intro h3 {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  color: #14bbea;
+}
+
+.intro ul li {
+  list-style: none;
+  font-weight: 800;
+  font-size: 65px;
+  line-height: 76px;
+  color: #ffffff;
+}
+
+.intro ul li:nth-child(2) {
+  color: #f0ab00;
+}
+.main {
+  background-color: #001435;
+}
+section {
+  display: flex;
+  overflow: hidden;
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  overflow: hidden;
+}
+
+.about-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.about-title h2 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.about-title p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #cccccc;
+  margin: 0 0 80px 0;
+}
+
+.desc-title {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 45px;
+  color: #ffffff;
+  margin: 0 0 22px 0;
+}
+.desc-title span {
+  color: #009dc9;
+}
+
+.row-title {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 35px;
+  color: #f8f8f8;
+  margin: 0 0 104px 0;
+}
+/*--------------------------------------------------------------
+# about
+--------------------------------------------------------------*/
+.about .card {
+  display: flex;
+  align-items: center;
+  width: 278px;
+  height: 386px;
+  border-radius: 19px;
+  transition: all ease-in-out 0.4s;
+}
+.about .card img {
+  width: 107px;
+  height: 113px;
+  margin: 50px 0 10px 0;
+}
+.about .card h5 {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 21px;
+}
+.about .card p {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+}
+.about .card:hover {
+  transform: translateY(-40px);
+}
+.about .card:hover h5 {
+  color: #47b2e4;
+}
+
+.dark-card {
+  background: #000;
+  color: #ffffff;
 }
