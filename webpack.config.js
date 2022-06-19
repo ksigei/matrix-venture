@@ -1,63 +1,70 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
-
-const isProduction = process.env.NODE_ENV == "production";
-
-const stylesHandler = isProduction
-  ? MiniCssExtractPlugin.loader
-  : "style-loader";
-
-const config = {
-  entry: "./src/index.js",
-  output: {
-    path: path.resolve(__dirname, "dist"),
+module.exports = {
+  entry: {
+    main: path.resolve(__dirname, './src/index.js'),
   },
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name].bundle.js',
+  },
+  mode: 'development',
   devServer: {
+    historyApiFallback: true,
+    static: path.resolve(__dirname, './dist'),
     open: true,
-    host: "localhost",
+    compress: true,
+    hot: true,
+    port: 8080,
+    host: 'localhost',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      title: 'webpack Boilerplate',
+      template: path.resolve(__dirname, './src/index.html'), // template file
+      filename: 'index.html', // output file
     }),
-
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
+      // JavaScript
       {
-        test: /\.(js|jsx)$/i,
-        loader: "babel-loader",
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
       },
+      // Images
       {
-        test: /\.css$/i,
-        use: [stylesHandler, "css-loader"],
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
       },
+      // Fonts and SVGs
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/inline',
       },
-
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
+      // CSS, PostCSS, and Sass
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: ['autoprefixer'],
+              },
+            },
+          },
+        ],
+      },
     ],
   },
-};
-
-module.exports = () => {
-  if (isProduction) {
-    config.mode = "production";
-
-    config.plugins.push(new MiniCssExtractPlugin());
-
-    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
-  } else {
-    config.mode = "development";
-  }
-  return config;
 };
